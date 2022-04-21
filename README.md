@@ -346,7 +346,7 @@ func Topo(Graph G)
 
 定义每个任务的最早开始时间earlist start time，记为$est_i$
 
-每个人物的$est_i$和时长$l_i$唯一地确定了任务的最早结束时间earlist finish time，记为$eft_i=est_i+l_i$
+每个任务的$est_i$和时长$l_i$唯一地确定了任务的最早结束时间earlist finish time，记为$eft_i=est_i+l_i$
 
 - 不依赖任何其他任务的任务$est_i=0$
 - 依赖于若干其他任务的任务，其$est_i$为依赖任务中$eft_j$的最大值，$est_i=max\{eft_i|a_i\to a_j\}$
@@ -402,7 +402,7 @@ func strongconnect(v)
 	for each(v,w) in E:
 		if w未访问过:
 			strongconnect(w)
-			v.lowlink = min(v.lowlink, w.index)
+			v.lowlink = min(v.lowlink, w.lowlink)
 		else if w在栈S中:
 			v.lowlink = min(v.lowlink, w.index)
 	
