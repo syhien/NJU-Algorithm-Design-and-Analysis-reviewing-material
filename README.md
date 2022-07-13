@@ -640,7 +640,7 @@ Func Kruskal
 
 类似Prim，每次都从候选点中选择最近的加入最短路径树
 
-**无法处理非负边权**
+**无法处理负边权**
 
 ```
 func Dijkstra(G, s)
@@ -654,11 +654,12 @@ func Dijkstra(G, s)
 	while Q非空:
 		x = Q取队首
 		for each (x,i) in E:
-			if dis[x] + xi.weight < dis[i]:
-				dis[i] = dis[x] + xi.weight
-				i前驱记为x
-				if i不在Q中:
-					i进Q
+			if i未访问 and dis[x] + xi.weight < dis[i]: // 负边失败的原因，不更新已计算完毕的节点
+                    dis[i] = dis[x] + xi.weight
+                    i前驱记为x
+                    if i不在Q中:
+                        i进Q
+        x标记为已访问
 ```
 
 对于每个点，都要进出队列Q；对于每条边，都要被确认一次代价
